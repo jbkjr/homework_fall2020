@@ -4,6 +4,7 @@ import time
 
 import gym
 import torch
+import pickle
 
 from cs285.infrastructure import pytorch_util as ptu
 from cs285.infrastructure.logger import Logger
@@ -169,7 +170,7 @@ class RL_Trainer(object):
         #paths, envsteps_this_batch = TODO
 
         if itr == 0:
-            with open(loaded_initial_expertdata, 'rb') as paths_file:
+            with open(load_initial_expertdata, 'rb') as paths_file:
                 loaded_paths=pickle.load(paths_file)
             paths, envsteps_this_batch = loaded_paths, 0
         else:
@@ -203,7 +204,7 @@ class RL_Trainer(object):
             # TODO use the sampled data to train an agent
             # HINT: use the agent's train function
             # HINT: keep the agent's training log for debugging
-            train_log = self.actor.train(ob_batch, ac_batch, re_batch,
+            train_log = self.agent.train(ob_batch, ac_batch, re_batch,
                                          next_ob_batch, terminal_batch)
             all_logs.append(train_log)
         return all_logs

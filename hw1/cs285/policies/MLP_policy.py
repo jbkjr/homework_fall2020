@@ -82,9 +82,9 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 
         # TODO return the action that the policy prescribes
         #raise NotImplementedError
-        observation = torch.Tensor(observation, dtype=torch.float).to(ptu.device)
+        observation = torch.tensor(observation, dtype=torch.float).to(ptu.device)
         action_dist = self.forward(observation)
-        return action_distribution.sample().cpu().detach().numpy()
+        return action_dist.sample().cpu().detach().numpy()
 
 
     # update/train this policy
@@ -124,7 +124,7 @@ class MLPPolicySL(MLPPolicy):
         # TODO: update the policy and return the loss
         self.optimizer.zero_grad()
         observations = torch.tensor(observations, device=ptu.device, dtype=torch.float)
-        actions = torch.tensor(actions, device=tpu.device, dtype=torch.int if
+        actions = torch.tensor(actions, device=ptu.device, dtype=torch.int if
                                self.discrete else torch.float)
         action_distribution = self(observations)
 
