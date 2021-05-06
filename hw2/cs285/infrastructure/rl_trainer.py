@@ -180,7 +180,7 @@ class RL_Trainer(object):
         print("\nCollecting data to be used for training...")
         #paths, envsteps_this_batch = TODO
 
-        if itr == 0:
+        if itr == 0 and load_initial_expertdata is not None:
             with open(load_initial_expertdata, 'rb') as paths_file:
                 loaded_paths=pickle.load(paths_file)
             paths, envsteps_this_batch = loaded_paths, 0

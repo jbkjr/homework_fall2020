@@ -8,6 +8,8 @@ import numpy as np
 import torch
 from torch import distributions
 
+from typing import Any
+
 from cs285.infrastructure.utils import normalize
 from cs285.infrastructure import pytorch_util as ptu
 from cs285.policies.base_policy import BasePolicy
